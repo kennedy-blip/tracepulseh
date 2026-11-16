@@ -17,10 +17,13 @@ The Vite-only server runs the frontend with a browser-local demo fallback. To ru
 npm run build
 ```
 
+A GitHub Actions workflow in `.github/workflows/ci.yml` runs the production build on pushes and pull requests targeting `main`.
+
 ## API
 
 - `GET /api/logs?level=ERROR&service=vector-db&search=timeout` — filtered log stream, severity counts and service health.
 - `POST /api/logs` — accepts `{ "level":"ERROR", "service":"api-gateway", "message":"Example", "metadata":{} }`.
+- `DELETE /api/logs` — clears the current in-memory log buffer.
 - `GET /api/traces?traceId=tr-a81f` — trace groups, span trees and durations.
 - `POST /api/traces` — accepts `{ "traceId":"tr-123", "parentSpanId":null, "service":"api-gateway", "operation":"GET /items", "startTime":0, "duration":42, "status":"ok" }`.
 
